@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/StockDBPool"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://umj64-004.cafe24.com:3306/djc4223"
+		username="djc4223"
+		password="djc4223!"
+		maxActive="20"
+		maxIdle="10"
+		maxWait="-1"
+		removeAbandoned="true"
+		removeAbandonedTimeout="600" />
+</Context>

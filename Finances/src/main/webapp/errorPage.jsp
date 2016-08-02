@@ -1,0 +1,201 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<img src="resources/img/error.png" width="200" height="200" />
+<h4>에러가 발생하였습니다. 메인 페이지로 갑니다.</h4>
+<script>
+	window.onload = function(){
+		setTimeout(function(){
+			window.location.href = 'index';
+		},1000)
+	}
+</script>
+<!-- <div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div>
+<div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div>
+<div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div>
+<div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div><div>
+	<table>
+		<tr>
+			<td>용량늘리기</td>
+		</tr>
+	</table>
+</div> -->

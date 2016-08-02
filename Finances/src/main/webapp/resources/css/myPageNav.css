@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+	#myPageNav{
+		padding-left:10px;
+		padding-right:10px;
+	}
+
+	#myPageNavInside{
+		border-bottom:1px solid #ededed;
+	}
+	
+	
+	#myPageNav ul{
+		list-style:none;
+	}
+	
+	#myPageNav li{
+		display:inline-block;
+		width:24.60%;
+		text-align:center;
+	}
+	
+	#myPageNav li a{
+		display:inline-block;
+		width:100%;
+		color:black;
+		height:20px;
+		font-size:18px;
+		line-height:20px;
+		text-decoration:none;
+	}
+	
+	#myPageNav li a:hover{
+		background:#ededed;
+	}

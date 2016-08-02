@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+@font-face{
+	font-family: '나눔 고딕';
+	src : url('../font/NANUMGOTHIC.woff'),url('../font/NANUMGOTHIC.TTF');
+}
