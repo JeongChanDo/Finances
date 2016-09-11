@@ -39,9 +39,17 @@ public class MyPageController {
 		return "myPage/myPage";
 	}
 	
-	@RequestMapping("/friendList")
-	public String friendList(HttpServletRequest reuqest){
+	@RequestMapping("deleteFriend")
+	public String deleteFriend(HttpServletRequest request){
 		
+		memberService.deleteFriend(request);
+		
+		return "redirect:friend";
+	}
+	
+	@RequestMapping("/friend")
+	public String friendList(HttpServletRequest request){
+		memberService.friendList(request);
 		return "myPage/friend";
 	}
 	

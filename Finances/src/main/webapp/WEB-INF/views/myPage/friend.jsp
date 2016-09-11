@@ -29,9 +29,8 @@
 		<tr>
 			<td>등록일</td>
 			<td>아이디</td>
-			<td>메시지</td>
-			<td>거래</td>
-			<td>삭제</td>		
+			<td></td>
+
 		</tr>
 		<c:if test="${empty fList}">
 			<tr>
@@ -41,11 +40,14 @@
 		<c:if test="${not empty fList}">
 			<c:forEach var="f" items="${fList}">
 				<tr>
-					<td>${f.id}</td>
-					<td></td>
-					<td><a href="">메시지</a></td>
-					<td><a href="">거래</a></td>
-					<td><a href="">삭제</a></td>
+					<td>${f.time.toString().substring(0,f.time.toString().length()-2)}</td>
+					<td>${f.friend}</td>
+					<td>
+						<a href="writeMessage?id=${f.friend}">메시지</a>
+						&nbsp;<a href="trade?id=${f.friend}">거래</a>
+						&nbsp;<a href="deleteFriend?id=${f.friend}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+					</td>
+
 				</tr>
 			</c:forEach>
 		</c:if>

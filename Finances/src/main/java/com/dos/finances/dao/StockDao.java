@@ -27,6 +27,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Controller;
 
 import com.dos.finances.bean.BuyStockBean;
+import com.dos.finances.bean.MemberBean;
 import com.dos.finances.bean.StockBean2;
 import com.dos.finances.bean.StockBean4;
 import com.google.gson.JsonArray;
@@ -61,6 +62,26 @@ public class StockDao {
 		sql = "set sql_safe_updates=0";
 		
 		jdbcTemplate.update(sql);
+	}
+	
+	public MemberBean getLoginMember(HttpServletRequest request){
+		return (MemberBean)request.getSession().getAttribute("loginMember");
+	}
+	
+	public void tradeList(HttpServletRequest request){
+		MemberBean me = getLoginMember(request);
+		
+		sql ="select t1.time,t1.id, t1.code,t1.name,t1.price,"
+				+ "t1.totalprice, t1.volume, t2.price "
+				+ "from finance_stock_trade_buy t1, "
+				+ "(select * from finance_stock_price_day"
+				+ " where time = (select max(time) from finance_stock_price_day)) t2"
+				+ " where t1.code = t2.code and t1.id = '"+me.getId()+"' order by time desc";
+	
+		List<BuyStockBean> sList= jdbcTemplate.query(sql, new BuyStockBeanRowMapper());
+		
+		
+		request.setAttribute("sList", sList);
 	}
 	
 	//총 주가 자산
@@ -871,4 +892,6 @@ public class StockDao {
 		
 		
 	}
+	
+	
 }

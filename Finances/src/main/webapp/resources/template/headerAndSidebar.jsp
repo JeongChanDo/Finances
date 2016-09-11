@@ -149,6 +149,9 @@
 						<li>
 							<a href="message">메시지</a>
 						</li>
+						<li>
+							<a href="friend">친구목록</a>
+						</li>
 					</ul>	
 				
 				</li>			

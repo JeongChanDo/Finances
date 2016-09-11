@@ -15,7 +15,9 @@ public class MemberService {
 	@Autowired
 	private MemberDao dao;
 	
-	
+	public void deleteFriend(HttpServletRequest request){
+		dao.deleteFriend(request);
+	}
 	
 	public void addFriendMessage(HttpServletRequest request){
 		dao.addFriendMessage(request);	

@@ -32,6 +32,14 @@ public class MemberDao {
 	
 	String sql;
 	
+	public void deleteFriend(HttpServletRequest request){
+		MemberBean me = getLoginMember(request);
+		String id = request.getParameter("id");
+		sql ="delete from finance_friend where me='"+me.getId()+"' and friend = '"+id+"' ";
+		
+		jdbcTemplate.update(sql);
+	}
+	
 	public MemberBean getLoginMember(HttpServletRequest request){
 		return (MemberBean)request.getSession().getAttribute("loginMember");
 	}
@@ -44,7 +52,7 @@ public class MemberDao {
 		System.out.println("me : " + me.getId());
 		System.out.println("friend : " + id);
 		sql ="insert into finance_message(time,sender,title,receiver,content,checked)"
-				+ " values(now(),'"+me.getId()+"','"+me.getId()+"님의 친구 등록','"+id+"','"+me.getId()+"님께서 친구로 등록하셨습니다',false)";
+				+ " values(now(),'SYSTEM','"+me.getId()+"님의 친구 등록','"+id+"','"+me.getId()+"님께서 친구로 등록하셨습니다',false)";
 		
 		jdbcTemplate.update(sql);
 		
@@ -55,11 +63,11 @@ public class MemberDao {
 	public void getFriendList(HttpServletRequest request){
 		String me = getLoginMember(request).getId();
 		
-		sql ="select * from finance_friend where me = '"+me+"'";
+		sql ="select * from finance_friend where me = '"+me+"' order by time desc";
 		
 		List<FriendBean> fList = jdbcTemplate.query(sql, new FriendBeanRowMapper());
 		
-		
+		System.out.println("fList size : " + fList.size());
 		request.setAttribute("fList", fList);
 	}
 	

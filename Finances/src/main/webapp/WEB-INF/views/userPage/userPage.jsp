@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-	<ul>
+	<ul style="list-style:none;">
 		<li style="margin-bottom:20px;margin-top:20px;"><span style="font-size:30px;padding-left:20px;">유저 정보</span></li>
 	</ul>
 <div id="userPageDiv">
@@ -32,7 +32,6 @@
 			if(isFriend){
 				%>
 				
-				<span>이미 친구로 등록된 회원 입니다.</span>
 				<%
 			}else{
 				%>
@@ -42,7 +41,7 @@
 		%>
 	</c:if>
 		<div id="userInfoTableDiv" style="padding:30px;">
-			<table id="userInfoTable">	
+			<table class="table" id="userInfoTable">	
 				<tr>
 					<td>아이디</td>
 					<td>${user.id}</td>
@@ -75,19 +74,16 @@
 				
 				<tr>
 					<td>주소</td>
-					<td>${user.address1 }</td>
+					<td>${user.address1 } &nbsp;&nbsp;${user.address2 }</td>
 				</tr>
 				
-				<tr>
-					<td></td>
-					<td>${users.address2 }</td>
-				</tr>
+				
 			</table>
 		</div>
 		
 		<div id="userLatesestArticleListDiv">
 			<h4>최근 작성글</h4>
-			<table id="uesrLatesestArticleListTable">
+			<table class="table" id="uesrLatesestArticleListTable">
 				<tr>
 					<td>작성일</td>
 					<td>제목</td>
@@ -112,7 +108,7 @@
 		
 		<div id="userLatesestCommentListDiv">
 			<h4>최근 덧글</h4>
-			<table id="uesrLatesestCommentListTable">
+			<table class="table" id="uesrLatesestCommentListTable">
 				<tr>
 					<td>작성일</td>
 					<td>내용</td>
@@ -135,7 +131,7 @@
 		
 		<div id="totalStockList">
 			<h4>소유한 주식</h4>
-			<table>
+			<table class="table">
 				<tr>
 					<td>기업</td>
 					<td>소유량</td>

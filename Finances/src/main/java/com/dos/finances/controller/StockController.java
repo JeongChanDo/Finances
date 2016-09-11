@@ -51,6 +51,14 @@ public class StockController {
 		return "stock/stockSell";
 	}
 	
+	@RequestMapping("trade")
+	public String tradeList(HttpServletRequest request){
+		service.tradeList(request);
+		return "userPage/trade";
+	}
+	
+	
+	
 	@RequestMapping("stockBuyProcess")
 	public String stockBuyProcess(HttpServletRequest request,String code,HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("utf-8");

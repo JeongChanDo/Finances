@@ -30,6 +30,14 @@ public class MyPageService {
 	@Autowired
 	ETCDao etcDao;
 	
+	public MemberBean getLoginMember(HttpServletRequest request){
+		return (MemberBean)request.getSession().getAttribute("loginMember");
+	}
+	
+	public void getFriendList(HttpServletRequest request){
+		memberDao.getFriendList(request);
+	}
+	
 	
 	public void sendMessageProcess(MessageBean message){
 		message.setTime(new Timestamp(System.currentTimeMillis()));

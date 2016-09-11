@@ -48,6 +48,8 @@ public class MemberController {
 		
 	}
 	*/
+
+	
 	@RequestMapping(value="messageSearch",method=RequestMethod.GET)
 	public ModelAndView messageSearch(HttpServletRequest request){
 		

@@ -21,3 +21,12 @@ create table finance_stock_trade_sell(
 	volume int not null
 );
 
+
+select * from finance_stock_trade_buy where id = 'djc4223' order by time desc;
+
+select t1.time,t1.id, t1.code,t1.name,t1.price,
+				t1.totalprice, t1.volume, t2.price 
+				from finance_stock_trade_buy t1, 
+				(select * from finance_stock_price_day
+				 where time = (select max(time) from finance_stock_price_day)) t2
+				 where t1.code = t2.code and t1.id = 'djc4223' order by time desc

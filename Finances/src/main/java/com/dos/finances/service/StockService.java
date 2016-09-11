@@ -35,6 +35,10 @@ public class StockService {
 	@Autowired
 	private MemberDao memberDao;
 	
+	public void tradeList(HttpServletRequest request){
+		dao.tradeList(request);
+	}
+	
 	public void stock(HttpServletRequest request){
 
 	//	ServletContext ctx = request.getServletContext();
