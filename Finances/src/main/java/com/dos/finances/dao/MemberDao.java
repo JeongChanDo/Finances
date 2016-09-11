@@ -34,6 +34,99 @@ public class MemberDao {
 	
 	String sql;
 	
+	public void getFriendList(HttpServletRequest request){
+		
+	}
+	
+	
+	public void messageSearchService(HttpServletRequest request){
+
+		String id = ((MemberBean)request.getSession().getAttribute("loginMember")).getId();
+		int list = Integer.parseInt(request.getParameter("list"));
+		String keyword = "%"+request.getParameter("keyword")+"%";
+		int option = Integer.parseInt(request.getParameter("option"));
+		
+		
+		System.out.println("id : " +id +"   keyword : " + keyword);
+		
+		String pageNo = request.getParameter("pageNo");
+		
+		int startNo = (Integer.parseInt(pageNo)-1)*10;
+		int endNo = startNo + 10;
+		
+		
+
+		String sql1 = null;
+		//제목
+		if(option==1){
+			
+			//보낸 메시지 리스트- 받는이
+			if(list==1){
+				sql1 = "select * from finance_message where sender = :id and title like :keyword order by time desc limit :startNo, :endNo";
+			//받은 메시지 리스트- 받는이
+			}else{
+				sql1 = "select * from finance_message where receiver = :id and title like :keyword order by time desc limit :startNo, :endNo";
+			}
+			
+		//받는이 or 보낸이
+		}else{
+			//보낸 메시지 리스트- 받는이
+			if(list==1){
+				sql1 = "select * from finance_message where sender = :id and receiver like :keyword order by time desc limit :startNo, :endNo";
+			//받은 메시지 리스트- 받는이
+			}else{
+				sql1 = "select * from finance_message where receiver = :id and sender like :keyword order by time desc limit :startNo, :endNo";
+			}
+		}
+		
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id",id)
+				.addValue("startNo",startNo).addValue("endNo",endNo).addValue("keyword",keyword);
+		
+	
+		
+		
+		List<MessageBean> messages = namedJdbcTemplate.query(sql1,param, new MessageBeanRowMapper());
+		
+		System.out.println("리스트 크기 : " + messages.size());
+		request.setAttribute("messages", messages);
+		
+		
+		//다음 페이지가 존재하는지 체크하는 알고리즘
+		
+		String sql2 = null;
+
+
+		if(option==1){
+			
+			//보낸 메시지 리스트- 받는이
+			if(list==1){
+				sql2 = "select count(*) from finance_message where sender = :id and title like :keyword order by time desc";
+			//받은 메시지 리스트- 받는이
+			}else{
+				sql2 = "select count(*) from finance_message where receiver = :id and title like :keyword order by time desc";
+			}
+			
+		//받는이 or 보낸이
+		}else{
+			//보낸 메시지 리스트- 받는이
+			if(list==1){
+				sql2 = "select count(*) from finance_message where sender = :id and receiver like :keyword order by time desc";
+			//받은 메시지 리스트- 받는이
+			}else{
+				sql2 = "select count(*) from finance_message where receiver = :id and sender like :keyword order by time desc";
+			}
+		}
+		int totalCount = namedJdbcTemplate.queryForObject(sql2, param,Integer.class);
+		System.out.println("totalCount : " + totalCount + "      endNo : " + endNo);
+		if(totalCount < endNo){
+			System.out.println("다음 페이지가 존재하지 않습니다.");
+			request.setAttribute("nextPageExist",false);
+		}else{
+			System.out.println("다음 페이지가 존재 합니다.");
+			request.setAttribute("nextPageExist",true);
+		}
+		
+	}
 	
 	public void messageListService(HttpServletRequest request){
 
@@ -51,32 +144,37 @@ public class MemberDao {
 				.addValue("startNo",startNo).addValue("endNo",endNo);
 		
 		
-		//보낸 메시지 리스트
-		if(list ==1 ){
-			sql = "select * from finance_message where sender = :id order by time desc limit :startNo, :endNo";
+		String sql1 = null;
+		
+		if(list==1){
+			sql1 = "select * from finance_message where sender = :id order by time desc limit :startNo, :endNo";
 		}else{
-		//받은 메시지 리스트	
-			sql = "select * from finance_message where receiver = :id order by time desc limit :startNo, :endNo";
-
+			sql1 = "select * from finance_message where receiver = :id order by time desc limit :startNo, :endNo";
 		}
 		
-		List<MessageBean> messages = namedJdbcTemplate.query(sql,param, new MessageBeanRowMapper());
+
+		
+		List<MessageBean> messages = namedJdbcTemplate.query(sql1,param, new MessageBeanRowMapper());
 		
 		System.out.println("리스트 크기 : " + messages.size());
 		request.setAttribute("messages", messages);
 		
 		
+		
+		
 		//다음 페이지가 존재하는지 체크하는 알고리즘
 		
+		String sql2 = null;
+
 		//보낸 메시지 리스트
 		if(list ==1 ){
-			sql = "select count(*) from finance_message where sender = :id";
+			sql2 = "select count(*) from finance_message where sender = :id";
 		}else{
 		//받은 메시지 리스트	
-			sql = "select count(*) from finance_message where receiver = :id";
+			sql2 = "select count(*) from finance_message where receiver = :id";
 
 		}
-		int totalCount = namedJdbcTemplate.queryForObject(sql, param,Integer.class);
+		int totalCount = namedJdbcTemplate.queryForObject(sql2, param,Integer.class);
 		System.out.println("totalCount : " + totalCount + "      endNo : " + endNo);
 		if(totalCount < endNo){
 			System.out.println("다음 페이지가 존재하지 않습니다.");
@@ -87,49 +185,6 @@ public class MemberDao {
 		}
 		
 		
-		/*
-		
-		if(request.getParameter("keyword") != null){
-			
-			String keyword = request.getParameter("keyword");
-			
-			int option = Integer.parseInt(request.getParameter("option"));
-			
-			
-			param = new MapSqlParameterSource().addValue("id",id)
-					.addValue("startNo",startNo).addValue("endNo",endNo)
-					.addValue("keyword", "%"+keyword+"%");
-			
-			
-			if(option == 1){
-				
-				//보낸 메시지 리스트
-				if(list ==1 ){
-					sql = "select * from finance_message where sender = :id"
-							+ " order by time desc limit :startNo, :endNo";
-				}else{
-				//받은 메시지 리스트	
-					sql = "select * from finance_message where receiver = :id"
-							+ " order by time desc limit :startNo, :endNo";
-
-				}
-			}else if(option == 2){
-				//보낸 메시지 리스트
-				if(list ==1 ){
-					sql = "select * from finance_message where sender = :id"
-							+ " order by time desc limit :startNo, :endNo";
-				}else{
-				//받은 메시지 리스트	
-					sql = "select * from finance_message where receiver = :id"
-							+ " order by time desc limit :startNo, :endNo";
-
-				}
-			}
-			
-		}
-		
-		
-		*/
 		
 		
 	}
@@ -325,6 +380,7 @@ public class MemberDao {
 			m.setChecked(rs.getBoolean(7));
 			System.out.println("\n\n message_code : " + m.getMessageCode() );
 			System.out.println("time : " + m.getTime());
+			System.out.println("title : " +m.getTitle());
 			System.out.println("sender : " + m.getSender());
 			System.out.println("receiver : " + m.getReceiver());
 			System.out.println("content : " + m.getContent());

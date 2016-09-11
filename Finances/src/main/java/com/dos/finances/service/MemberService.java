@@ -20,10 +20,18 @@ public class MemberService {
 		dao.messageOpen(id,no);
 	}
 	
+	public void friendList(HttpServletRequest request){
+		dao.getFriendList(request);
+	}
+	
 	public void messageService(HttpServletRequest request){
 		dao.messageService(request);
 	}
 	
+	
+	public void messageSearchService(HttpServletRequest request){
+		dao.messageSearchService(request);
+	}
 	
 	public void messageListService(HttpServletRequest request){
 		dao.messageListService(request);

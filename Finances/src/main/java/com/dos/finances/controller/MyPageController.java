@@ -39,6 +39,12 @@ public class MyPageController {
 		return "myPage/myPage";
 	}
 	
+	@RequestMapping("/friendList")
+	public String friendList(HttpServletRequest reuqest){
+		
+		return "myPage/friend";
+	}
+	
 	
 	@RequestMapping("/myStock")
 	public String myStock(HttpServletRequest request){

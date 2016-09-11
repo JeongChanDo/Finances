@@ -19,7 +19,7 @@
 	<br/>
 	<br/>
 	<div id="searchDiv" class="form-group form-inline">
-		<form action="messageList">
+		<form action="messageSearch">
 			<input type="hidden" name="list" value="${param.list}"/>
 			<input type="hidden" name="pageNo" value="1"/>
 			<input class="form-control" name="keyword" type="text" />
@@ -27,7 +27,7 @@
 				<option value="1">제목</option>
 				
 				<c:if test="${param.list == '1'}">
-					<option value="2">받는이</option>
+					<option value="1">받는이</option>
 				</c:if>
 				<c:if test="${param.list == '2'}">
 					<option value="2">보낸이</option>
@@ -41,7 +41,7 @@
 		<table class="table">
 			<tr>
 				<td>시간</td>
-				<td>${(param.list == "1" ? "받은 이" : "보낸 이")}</td>
+				<td>${(param.list == "1" ? "받는이" : "보낸이")}</td>
 				<td>제목</td>
 				<td>확인여부</td>
 			</tr>
@@ -49,7 +49,7 @@
 				<c:forEach var="m" items="${messages}">
 					<tr>
 						<td>${m.time.toString().substring(0,m.time.toString().length()-2)}</td>
-						<td>${m.receiver}</td>
+						<td>${param.list=="1"?m.receiver:m.sender}</td>
 						<td>
 							<a href="#"  onclick="openMessage(${m.messageCode})">
 								${m.title }
@@ -68,11 +68,21 @@
 		<%
 			int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 		%>
-		<c:if test="${param.pageNo != '1' }">
-			<a href="messageList?list=${param.list}&pageNo=<%=pageNo-1%>">이전</a>
+		<c:if test="${empty param.option }">
+			<c:if test="${param.pageNo != '1' }">
+				<a href="messageList?list=${param.list}&pageNo=<%=pageNo-1%>">이전</a>
+			</c:if>
+			<c:if test="${nextPageExist == true}">
+				<a href="messageList?list=${param.list}&pageNo=<%=pageNo+1%>">다음</a>
+			</c:if>
 		</c:if>
-		<c:if test="${nextPageExist == true}">
-			<a href="messageList?list=${param.list}&pageNo=<%=pageNo+1%>">다음</a>
+		<c:if test="${not empty param.option }">
+			<c:if test="${param.pageNo != '1' }">
+				<a href="messageSearch?list=${param.list}&pageNo=<%=pageNo-1%>&option=${param.option}&keyword=${param.keyword}">이전</a>
+			</c:if>
+			<c:if test="${nextPageExist == true}">
+				<a href="messageSearch?list=${param.list}&pageNo=<%=pageNo+1%>&option=${param.option}&keyword=${param.keyword}">다음</a>
+			</c:if>
 		</c:if>
 	</div>
 </div>

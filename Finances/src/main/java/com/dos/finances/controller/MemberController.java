@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dos.finances.bean.MemberBean;
@@ -49,6 +48,24 @@ public class MemberController {
 		
 	}
 	*/
+	@RequestMapping(value="messageSearch",method=RequestMethod.GET)
+	public ModelAndView messageSearch(HttpServletRequest request){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		String viewName = "myPage/messageList";
+		
+		modelAndView.setViewName(viewName);
+		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		service.messageSearchService(request);
+		
+		modelAndView.addAllObjects(modelMap);
+		
+		
+		
+		return modelAndView;
+	}
+	
 	
 	@RequestMapping(value="messageList",method = RequestMethod.GET)
 	public ModelAndView messageList(HttpServletRequest request){
