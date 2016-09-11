@@ -36,7 +36,7 @@
 				<%
 			}else{
 				%>
-					<a href="addFriendProcess?id=${user.id}">친구 등록하기</a>
+					<a href="addFriendProcess?id=${user.id}" onclick="return confirm('${user.id}님을 친구로 등록하시겠습니까?')">친구 등록하기</a>
 				<%
 			}
 		%>

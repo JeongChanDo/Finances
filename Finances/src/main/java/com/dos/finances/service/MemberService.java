@@ -16,6 +16,11 @@ public class MemberService {
 	private MemberDao dao;
 	
 	
+	
+	public void addFriendMessage(HttpServletRequest request){
+		dao.addFriendMessage(request);	
+	}
+	
 	public void messageOpen(String id,int no){
 		dao.messageOpen(id,no);
 	}

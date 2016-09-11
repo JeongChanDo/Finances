@@ -160,7 +160,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("addFriendProcess")
-	public ModelAndView addFriendProcess(String id,HttpSession session){
+	public ModelAndView addFriendProcess(HttpServletRequest request,String id,HttpSession session){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:userPage?id="+id);
 		Map<String,Object> modelMap = new HashMap<String,Object>();
@@ -171,6 +171,7 @@ public class MemberController {
 		
 		service.addFriend(m.getId(),id);
 		
+		service.addFriendMessage(request);
 	
 		
 		modelAndView.addAllObjects(modelMap);

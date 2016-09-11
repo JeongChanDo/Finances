@@ -27,8 +27,8 @@
 	<h3>친구 목록</h3>
 	<table class="table">
 		<tr>
+			<td>등록일</td>
 			<td>아이디</td>
-			<td>닉네임</td>
 			<td>메시지</td>
 			<td>거래</td>
 			<td>삭제</td>		

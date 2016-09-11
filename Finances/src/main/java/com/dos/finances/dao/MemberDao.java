@@ -2,9 +2,7 @@ package com.dos.finances.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +14,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.dos.finances.bean.FriendBean;
 import com.dos.finances.bean.MemberBean;
 import com.dos.finances.bean.MessageBean;
 
@@ -34,8 +32,35 @@ public class MemberDao {
 	
 	String sql;
 	
-	public void getFriendList(HttpServletRequest request){
+	public MemberBean getLoginMember(HttpServletRequest request){
+		return (MemberBean)request.getSession().getAttribute("loginMember");
+	}
+	
+	
+	public void addFriendMessage(HttpServletRequest request){
+		MemberBean me = getLoginMember(request);
+		String id = request.getParameter("id");
 		
+		System.out.println("me : " + me.getId());
+		System.out.println("friend : " + id);
+		sql ="insert into finance_message(time,sender,title,receiver,content,checked)"
+				+ " values(now(),'"+me.getId()+"','"+me.getId()+"님의 친구 등록','"+id+"','"+me.getId()+"님께서 친구로 등록하셨습니다',false)";
+		
+		jdbcTemplate.update(sql);
+		
+	}
+	
+
+	
+	public void getFriendList(HttpServletRequest request){
+		String me = getLoginMember(request).getId();
+		
+		sql ="select * from finance_friend where me = '"+me+"'";
+		
+		List<FriendBean> fList = jdbcTemplate.query(sql, new FriendBeanRowMapper());
+		
+		
+		request.setAttribute("fList", fList);
 	}
 	
 	
@@ -390,4 +415,20 @@ public class MemberDao {
 		}
 		
 	}
+	
+	class FriendBeanRowMapper implements RowMapper<FriendBean>{
+		@Override
+		public FriendBean mapRow(ResultSet rs, int arg1) throws SQLException {
+			FriendBean f = new FriendBean();
+			f.setTime(rs.getTimestamp("time"));
+			f.setMe(rs.getString("me"));
+			f.setFriend(rs.getString("friend"));
+			
+			System.out.println("\n\n Friend Info\n time : " + f.getTime() +"\n me : " + f.getMe() +"\n friend : " +f.getFriend());
+			return f;
+		}
+		
+	}
+
+	
 }

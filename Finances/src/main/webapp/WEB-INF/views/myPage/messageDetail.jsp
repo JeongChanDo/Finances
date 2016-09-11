@@ -30,7 +30,7 @@
 				받는이
 			</td>
 			<td>
-				${m.receiver}
+				<a href="userPage?id=${m.receiver}" target="_blank">${m.receiver}</a>
 			</td>
 		</tr>
 		<tr>
