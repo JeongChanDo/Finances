@@ -203,7 +203,6 @@
 				</script>
 			</div>
 			<br/>
-		
 			<div class="ui-body ui-body-a" style="text-align:center;padding:15px;">
 			<%
 				if(isOpen){
@@ -212,7 +211,7 @@
 				<%
 					if(isLogin==true){
 				%>
-				<a href="stockBuy?code=<%=code%>" onclick="return buy()" >매입</a>
+				<a href="stockBuy?code=<%=code%>" class="btn btn-info" onclick="return buy()" >매입</a>
 				<%
 					}else{
 				%>
@@ -277,6 +276,7 @@
 					<tr>
 						<td>주주</td>
 						<td>소유량</td>
+						<td></td>
 					</tr>
 				</table>
 			</div>
@@ -292,7 +292,13 @@
 						var json = item;
 						var name = json.name;
 						var volume = json.y;
-						$("#stockholderList").append("<tr><td><a href='userPage?id="+name+"'>"+name+"</a></td><td>"+volume+"주<td/></tr>");
+						
+						if(name=='기타'){
+							$("#stockholderList").append("<tr><td>"+name+"</td><td>"+volume+"주<td/></tr>");
+						}else{
+							$("#stockholderList").append("<tr><td><a href='userPage?id="+name+"'>"+name+"</a></td><td>"+volume+"주<td/></tr>");
+						}
+					
 					})
 				})
 			</script>

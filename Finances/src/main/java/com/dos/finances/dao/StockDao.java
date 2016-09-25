@@ -553,7 +553,7 @@ public class StockDao {
 		
 		while(setIter.hasNext()){
 			String id = setIter.next();
-			sql="select volume from finance_stock_trade_buy where id = '"+id+"'";
+			sql="select volume from finance_stock_trade_buy where id = '"+id+"' and code = '"+code+"'";
 			
 			
 			List<Integer> volumeList= jdbcTemplate.query(sql, new RowMapper<Integer>(){

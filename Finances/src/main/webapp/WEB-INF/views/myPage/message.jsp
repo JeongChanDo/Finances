@@ -86,7 +86,7 @@
 			</c:if>
 			<c:if test="${empty receiveMessages}">
 				<tr>
-					<td colspan="3">
+					<td colspan="4">
 						받은 메시지가 존재하지 않습니다.
 					</td>
 				</tr>

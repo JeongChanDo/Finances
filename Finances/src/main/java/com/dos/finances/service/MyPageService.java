@@ -88,19 +88,20 @@ public class MyPageService {
 		List<StockBean4> yList1 = new ArrayList<StockBean4>();
 		List<StockBean4> yList2 = new ArrayList<StockBean4>();
 		
-
-		for(int i = 0; i < yList.size()/2+1;i++){
+		if(yList.size() != 0){
+			for(int i = 0; i < yList.size()/2+1;i++){
+				
+				yList1.add(yList.get(i));
+				
+			}
+			for(int i = yList.size()/2+1 ; i < yList.size(); i++){
+				yList2.add(yList.get(i));
+			}
 			
-			yList1.add(yList.get(i));
 			
+			request.setAttribute("yList1",yList1);
+			request.setAttribute("yList2",yList2);
 		}
-		for(int i = yList.size()/2+1 ; i < yList.size(); i++){
-			yList2.add(yList.get(i));
-		}
-		
-		
-		request.setAttribute("yList1",yList1);
-		request.setAttribute("yList2",yList2);
 	}
 	
 }

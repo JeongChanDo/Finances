@@ -10,7 +10,13 @@
 	StockBean2 stock = (StockBean2)request.getAttribute("stock");
 	MemberBean member = (MemberBean)session.getAttribute("loginMember");
 	
-	boolean isOpen = (boolean)application.getAttribute("isOpen");
+	//기존 코드
+	//boolean isOpen = (boolean)application.getAttribute("isOpen");
+	
+	
+	//잠시 오픈용
+	boolean isOpen = true;
+
 	if(!isOpen){
 %>
 	<script>
@@ -40,21 +46,58 @@
 	<form action="stockBuyProcess" method="post">
 		<input type="hidden" name="code" value="${stock.code}"/>
 		<input type="hidden" name="name" value="${stock.name}"/>
+	<table class="table">
+		<tr>
+			<td>
+				<label for="money">보유 현금</label>
+			</td>
+			<td>
+				<span style="min-height:2.2em;display:inline-block;line-height:2.2em;"><fmt:formatNumber type="currency" value="${loginMember.money}"/>원</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="volume">매입량</label>
+			</td>
+			<td>
+				<input type="number" id="volume" class="form-control" value="0" name="volume" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;" colspan="2">
+				<span id="here3" style="font-weight:bold;font-size:1.1em;"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="totalPrice">가격</label>
+			</td>
+			<td>
+				<span id="totalPrice" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here">0</span>원</span><br/>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;" colspan="2">
+				<span id="here2" style="font-weight:bold;font-size:1.1em;"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="balance">잔액</label>
+			</td>
+			<td>
+				<span id="balance" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here5">0</span>원</span><br/>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;" colspan="2">
+				<span id="here4" style="font-weight:bold;font-size:1.1em;"></span>
+			</td>
+		</tr>
+	</table>
 		
-	<div class="ui-body ui-body-a">
-		<div class="ui-field-contain">
-			<label for="money">보유 현금</label>
-			<span style="min-height:2.2em;display:inline-block;line-height:2.2em;"><fmt:formatNumber type="currency" value="${loginMember.money}"/>원</span>
-			
-		</div>
-		<div class="ui-field-contain">
-			<label for="volume">매입량</label>
-			<input type="number" id="volume" value="0" name="volume" />
-		</div>
-		<div class="ui-field-contain" style="text-align:right;">
-			<span id="here3" style="font-weight:bold;font-size:1.1em;"></span>
-		</div>
-		<script>
+		
+	<script>
 			$(function(){
 				var price = ${stock.price};
 				
@@ -93,21 +136,6 @@
 			}
 			
 		</script>
-		<div class="ui-field-contain">
-			<label for="totalPrice">가격</label>
-			<span id="totalPrice" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here">0</span>원</span><br/>
-		</div>
-		<div class="ui-field-contain" style="text-align:right;min-height:1.9em">
-			<span id="here2" style="font-weight:bold;font-size:1.1em;"></span>
-		</div>
-		<div class="ui-field-contain">
-			<label for="balance">잔액</label>
-			<span id="balance" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here5">0</span>원</span><br/>
-		</div>
-		<div class="ui-field-contain" style="text-align:right;min-height:1.9em">
-			<span id="here4" style="font-weight:bold;font-size:1.1em;"></span>
-		</div>
-	</div>
-	<button type="submit" onclick="return check()">매입</button>
+	<button type="submit" class="form-control" onclick="return check()">매입</button>
 	</form>
 </div>

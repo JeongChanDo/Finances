@@ -68,20 +68,24 @@
 %>
 <div id="result1" class="ajax_div">
 	<br/>
-	<div>
-	${sName }  (${sCode})
-	</div>
-	<div style="background:white;">
-	<fmt:formatNumber value="${sPrice }" type="currency"/>
-	</div>
-	<br/>
+	<table class="table">
+		<tr>
+			<th>
+				<h4>${sName } (${sCode})</h4>  
+			</th>
+		</tr>
+		<tr>
+			<td><fmt:formatNumber value="${sPrice }" type="currency"/></td>
+		</tr>
+	</table>
+
 	<div >
 		<a href="#" id="aDay" style="color:black;font-weight:none;">1일</a>
 		<a href="#" id="aMonth" style="color:black;font-weight:none;">1개월</a>
 	</div>
 	<script>
 		$(function(){
-			
+			$("#stockLayer").find(".col-sm-9").removeClass("col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main");
 			
 			$("#aMonth").on("click",function(){
 				$("#container").hide();
@@ -213,7 +217,8 @@
 				});
 			</script>
 	</div>
-	<br/>
+	<br/>	
+		
 		<%
 			if(isOpen){
 		%>
@@ -222,7 +227,7 @@
 				<input type="hidden" name="id" value="${loginMember.id }"/>
 				<input type="hidden" id="time" name="time" />
 				
-				<input type="submit" data-role="none" class="ui-btn" style="width:100%" value="매도"/>
+				<input type="submit" class="form-control" style="width:100%" value="매도"/>
 			</form>		
 		<%
 			}else{	

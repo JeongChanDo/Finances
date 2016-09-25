@@ -107,7 +107,7 @@
 	<br/>
 	
 	<div class="ui-body ui-body-a">
-	<table id="list">
+	<table class="table" id="list">
 		<tr>
 			<th>시간</th>
 			<th>이름</th>
@@ -154,26 +154,45 @@
 		<input type="hidden" name="code" value="${b.code }"/>
 		<input type="hidden" name="id" value="${b.id }"/>
 		<input type="hidden" name="time" value="${b.time}"/>
+	
+	<table class="table">
+		<tr>
+			<td><label for="money" style="min-height:2.2em;display:inline-block;line-height:2.2em;">보유현금</label></td>
+			<td style=""><span style="min-height:2.2em;display:inline-block;line-height:2.2em;"><fmt:formatNumber type="currency" value="${loginMember.money}"/>원</span></td>
+		</tr>
+		<tr>
+			<td><label for="volume" style="min-height:2.2em;display:inline-block;line-height:2.2em;">보유량</label></td>
+			<td style="text-align:right;"><span style="min-height:2.2em;display:inline-block;line-height:2.2em;">${b.volume} 주</span></td>
+		</tr>
+		<tr>
+			<td><label for="volume" style="min-height:2.2em;display:inline-block;line-height:2.2em;">매도량</label></td>
+			<td style="text-align:right;"><input style="min-height:2.2em;display:inline-block;line-height:2.2em;" class="form-control" type="number" id="volume" value="0" name="volume" /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align:right;"><span id="here3" style="font-weight:bold;font-size:1.1em;"></span></td>
+		</tr>
+		<tr>
+			<td><label for="totalPrice" style="min-height:2.2em;display:inline-block;line-height:2.2em;">금액</label></td>
+			<td style="text-align:right;"><span id="totalPrice" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here">0</span>원</span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align:right;"><span id="here2" style="font-weight:bold;font-size:1.1em;"></span></td>
+		</tr>
+		<tr>
+			<td><label for="balance" style="min-height:2.2em;display:inline-block;line-height:2.2em;">잔액</label></td>
+			<td style="text-align:right;"><span id="balance" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here5">0</span>원</span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align:right;"><span id="here4" style="font-weight:bold;font-size:1.1em;"></span></td>
+		</tr>
 		
-	<div class="ui-body ui-body-a">
-		<div class="ui-field-contain">
-			<label for="money">보유현금</label>
-			<span style="min-height:2.2em;display:inline-block;line-height:2.2em;"><fmt:formatNumber type="currency" value="${loginMember.money}"/>원</span>
-			
-		</div>
-		<div class="ui-field-contain">
-			<label for="volume">보유량</label>
-			<span style="min-height:2.2em;display:inline-block;line-height:2.2em;">${b.volume} 주</span>
-			
-		</div>
-		<div class="ui-field-contain">
-			<label for="volume">매도량</label>
-			<input type="number" id="volume" value="0" name="volume" />
-		</div>
-		<div class="ui-field-contain" style="text-align:right;">
-			<span id="here3" style="font-weight:bold;font-size:1.1em;"></span>
-		</div>
-		<script>
+	</table>
+	<button type="submit" class="form-control" onclick="return check()">매도</button>
+	</form>
+	<script>
 			$(function(){
 				var price = ${stock.price};
 				
@@ -214,21 +233,6 @@
 			}
 			
 		</script>
-		<div class="ui-field-contain">
-			<label for="totalPrice">금액</label>
-			<span id="totalPrice" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here">0</span>원</span><br/>
-		</div>
-		<div class="ui-field-contain" style="text-align:right;min-height:1.9em">
-			<span id="here2" style="font-weight:bold;font-size:1.1em;"></span>
-		</div>
-		<div class="ui-field-contain">
-			<label for="balance">잔액</label>
-			<span id="balance" style="min-height:2.2em;display:inline-block;line-height:2.2em;"><span id="here5">0</span>원</span><br/>
-		</div>
-		<div class="ui-field-contain" style="text-align:right;min-height:1.9em">
-			<span id="here4" style="font-weight:bold;font-size:1.1em;"></span>
-		</div>
-	</div>
-	<button type="submit" onclick="return check()">매도</button>
-	</form>
+	
+	
 </div>

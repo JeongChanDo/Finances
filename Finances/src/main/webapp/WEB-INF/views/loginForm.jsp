@@ -65,7 +65,7 @@
 </style>
 <div style="width:100%;height:100%;">
 	<div style="padding-top: 250px;margin: auto auto;width: 400px;height: 100px;">
-		<div style="border:1px solid #ededed;height:160px; padding:30px;">
+		<div style="border:1px solid #ededed;height:240px; padding:30px;">
 			<p style="font-size:60px;font-weight:100;margin-bottom:10px;">Login</p>
 			<form method="post" id="loginForm" name="loginForm"  action="login">
 				<div style="float:left;width:200px; margin-right:10px;">

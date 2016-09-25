@@ -151,7 +151,7 @@ public class MemberController {
 			
 		}
 		
-		
+		modelMap.put("totalStockList", stockDao.getTotalStockNameAndVolumeAboutId(id));
 		modelMap.put("latestArticleList", articleService.getLatestArticleListById(id));
 		modelMap.put("latestCommentList", articleService.getLatestCommentListById(id));
 		

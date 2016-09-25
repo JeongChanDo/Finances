@@ -12,34 +12,27 @@
 
 	<div id="indexBody" style="margin-left:20px;padding-top:100px;">
 <div  id="stock">
-
-
-			
-			
-		
-		
-		
-		
-		
-		
-		
 		
 		<!-- 
 		
 			뉴스 파트
 		 -->
 		
-		<div id="newsDiv" style="padding:10px;margin-bottom:30px;margin-right:60px;width:83%;font-weight:100;border:1px solid #ededed;">
-			<p style="font-size:20px;margin-bottom:5px;">NEWS</p>
-			<div id="newsBody"  style="border-top:1px solid #ededed;padding-top:5px;">
-				<ul style="list-style:none;" id="newsList">
-					<c:forEach var="n" items="${nList }">
-						<li><a href="${n.link}">${n.title}</a></li>
-					</c:forEach>
-				</ul>
-			</div>
+	
+		<div id="newsDivTable" style="margin-bottom:30px;margin-right:60px;width:83%;">
+			<table class="table">
+					<tr>
+						<th>NEWS</th>
+					</tr>
+				<c:forEach var="n" items="${nList }">
+					<tr>
+						<td>
+							<a href="${n.link}">${n.title}</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
-		
 		
 		
 		
@@ -147,165 +140,79 @@
 		
 		
 		
-		<div id="boardList">
-			
-			<div id="aList1" class="aListDiv">
-				<div class="communityListBody">
-					<ul class="communityList">
-						<li style="font-size:20px;font-weight:100;border-bottom:1px solid #ededed;"><a href="community?boardNo=1&pageNo=1">이야기</a></li>
-					
-					<c:if test="${not empty aList1 }">
-						<c:forEach var="a" items="${aList1 }">
-						<%
-							String title = ((ArticleBean)pageContext.getAttribute("a")).getTitle();
-						%>	
-						
-							<li><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}" >
-								<p class="aTitle"><%=title.length() >= 18 ? title.substring(0,18)+"...":title %></p>
-								<p class="aTime">
-								<%
-									ArticleBean a = (ArticleBean)pageContext.getAttribute("a");
-									String aDate = a.getDay().toString().substring(0,10);
-				
-									if(today.toString().substring(0,10).equals(aDate)){
-										%>
-											<fmt:formatDate value="${a.day }" pattern="aa hh:mm"/>
-										<%
-									}else{
-										
-										%>
-										<fmt:formatDate value="${a.day }" pattern="yyyy-MM-dd"/>
-										<%
-									}
-								%>
-								</p>
-							</a>
-							</li>
-						</c:forEach>
-					</c:if>
-					</ul>
-					<div style="clear:both;"></div>
-				</div>
-			</div>
-			
-			<div id="aList2" class="aListDiv">
-				<div class="communityListBody">
-					<ul class="communityList">
-						<li style="font-size:20px;font-weight:100;border-bottom:1px solid #ededed;"><a href="community?boardNo=3&pageNo=1">Q&A</a></li>
-					
-					
-					<c:if test="${not empty aList2 }">
-						<c:forEach var="a" items="${aList2 }">
-						<%
-							String title = ((ArticleBean)pageContext.getAttribute("a")).getTitle();
-						%>	
-						
-							<li><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}" >
-								<p class="aTitle"><%=title.length() >= 18 ? title.substring(0,18)+"...":title %></p>
-								<p class="aTime">
-								<%
-									ArticleBean a = (ArticleBean)pageContext.getAttribute("a");
-									String aDate = a.getDay().toString().substring(0,10);
-				
-									if(today.toString().substring(0,10).equals(aDate)){
-										%>
-											<fmt:formatDate value="${a.day }" pattern="aa hh:mm"/>
-										<%
-									}else{
-										
-										%>
-										<fmt:formatDate value="${a.day }" pattern="yyyy-MM-dd"/>
-										<%
-									}
-								%>
-								</p>
-							</a></li>
-						</c:forEach>
-					</c:if>
-					</ul>
-					<div style="clear:both;"></div>
-				</div>
-			</div>
-			<div id="aList1" class="aListDiv">
-				<div class="communityListBody">
-					<ul class="communityList">
-						
-						<li style="font-size:20px;font-weight:100;border-bottom:1px solid #ededed;"><a href="community?boardNo=3&pageNo=1">컬럼</a></li>			
-					
-					<c:if test="${not empty aList3 }">
-						<c:forEach var="a" items="${aList3 }">
-						<%
-							String title = ((ArticleBean)pageContext.getAttribute("a")).getTitle();
-						%>	
-						
-							<li><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}" >
-								<p class="aTitle"><%=title.length() >= 18 ? title.substring(0,18)+"...":title %></p>
-								<p class="aTime">
-								<%
-									ArticleBean a = (ArticleBean)pageContext.getAttribute("a");
-									String aDate = a.getDay().toString().substring(0,10);
-				
-									if(today.toString().substring(0,10).equals(aDate)){
-										%>
-											<fmt:formatDate value="${a.day }" pattern="aa hh:mm"/>
-										<%
-									}else{
-										
-										%>
-										<fmt:formatDate value="${a.day }" pattern="yyyy-MM-dd"/>
-										<%
-									}
-								%>
-								</p>
-							</a>
-							</li>
-						</c:forEach>
-					</c:if>
-					</ul>
-					<div style="clear:both;"></div>
-				</div>
-			</div>
-
+		
+		<div style="padding:0px;">
 	
-			<div id="aList2" class="aListDiv">
-				<div class="communityListBody">
-					<ul class="communityList">
 					
-						<li style="font-size:20px;font-weight:100;border-bottom:1px solid #ededed;"><a href="community?boardNo=4&pageNo=1">소식</a></li>
-					
-					<c:if test="${not empty aList4 }">
-						<c:forEach var="a" items="${aList4 }">
-						<%
-							String title = ((ArticleBean)pageContext.getAttribute("a")).getTitle();
-						%>	
-						
-							<li><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}" >
-								<p class="aTitle"><%=title.length() >= 18 ? title.substring(0,18)+"...":title %></p>
-								<p class="aTime">
-								<%
-									ArticleBean a = (ArticleBean)pageContext.getAttribute("a");
-									String aDate = a.getDay().toString().substring(0,10);
-				
-									if(today.toString().substring(0,10).equals(aDate)){
-										%>
-											<fmt:formatDate value="${a.day }" pattern="aa hh:mm"/>
-										<%
-									}else{
-										
-										%>
-										<fmt:formatDate value="${a.day }" pattern="yyyy-MM-dd"/>
-										<%
-									}
-								%>
-								</p>
-							</a></li>
+				<div class="stockTableDiv" >
+					<table class="table">
+						<tr>
+							<th>이야기</th>
+						</tr>
+						<c:forEach var="s" items="${aList1}">
+							<tr>
+								<td><a href="detail?boardNo=${s.boardNo }&pageNo=1&no=${s.no}">${s.title}</a></td>	
+							</tr>
 						</c:forEach>
-					</c:if>
-					</ul>
-					<div style="clear:both;"></div>
+					</table>
 				</div>
+				
+				
+				<div class="stockTableDiv" >
+					<table class="table">
+						<tr>
+							<th>Q&A</th>
+						</tr>
+						<c:forEach var="a" items="${aList2}">
+							<tr>
+								<td><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}">${a.title}</a></td>	
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				
+				
+				<div class="clear_line"></div>
+				
+				<div class="stockTableDiv" >
+					<table class="table">
+						<tr>
+							<th>칼럼</th>
+						</tr>
+						<c:forEach var="a" items="${aList3}">
+							<tr>
+								<td><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}">${a.title}</a></td>	
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				
+				
+				<div class="stockTableDiv" >
+					<table class="table">
+						<tr>
+							<th>소식</th>
+						</tr>
+						<c:forEach var="a" items="${aList4}">
+							<tr>
+								<td><a href="detail?boardNo=${a.boardNo }&pageNo=1&no=${a.no}">${a.title}</a></td>	
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				
+				
+				<div class="clear_line"></div>
 			</div>
 		
 		</div>
+			
+		<br/>
+		<div style="clear:both"></div>
+		<br/>
+		<br/>
+		
+		
+		
 		
 	</div>
